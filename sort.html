@@ -1,5 +1,11 @@
 <html>
   <head>
+    <style>
+      *[id*="list"] {
+        width: 33%;
+        float: left;
+      }
+    </style>
   </head>
   <body>
     <ul>
@@ -7,6 +13,9 @@
       <li><a class='active' href="sort.html">sort demo</a></li>
       <li><a href="optimized.html">optimized resort demo</a></li>
     </ul>
+    <p><b>
+      This is a demo showing the same backing collection sorted in three different ways at the view layer.
+    </b></p>
     <div id="app"></div>
   </body>
   <script src="node_modules/jquery/dist/jquery.js"></script>

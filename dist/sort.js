@@ -59,14 +59,16 @@ var MySortedList = (function (_Mn$CollectionView) {
 
 ;
 
-var myList = new Backbone.Collection(Array.prototype.slice.call(Commits, 0, 500));
+var myList = new Backbone.Collection(Array.prototype.slice.call(Commits, 0, 100));
 
 var SortLayout = (function (_Mn$LayoutView) {
   function SortLayout(opts) {
     _classCallCheck(this, SortLayout);
 
     this.regions = {
-      list: "#list"
+      list: "#list",
+      list2: "#list-two",
+      list3: "#list-three"
     };
 
     _get(Object.getPrototypeOf(SortLayout.prototype), "constructor", this).call(this, opts);
@@ -80,13 +82,25 @@ var SortLayout = (function (_Mn$LayoutView) {
         this.showChildView("list", new MySortedList({
           collection: myList
         }));
+        this.showChildView("list2", new MySortedList({
+          collection: myList,
+          viewComparator: function (model) {
+            return -1 * model.get("msg").length;
+          }
+        }));
+        this.showChildView("list3", new MySortedList({
+          collection: myList,
+          viewComparator: function (model) {
+            return Math.random();
+          }
+        }));
       },
       writable: true,
       configurable: true
     },
     template: {
       value: function template() {
-        return "<div id='list'></div>";
+        return "\n      <div id='list'></div>\n      <div id='list-two'></div>\n      <div id='list-three'></div>\n    ";
       },
       writable: true,
       configurable: true

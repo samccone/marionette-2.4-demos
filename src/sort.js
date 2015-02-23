@@ -19,12 +19,14 @@ class MySortedList extends Mn.CollectionView {
   }
 };
 
-let myList = new Backbone.Collection(Array.prototype.slice.call(Commits, 0, 500));
+let myList = new Backbone.Collection(Array.prototype.slice.call(Commits, 0, 100));
 
 class SortLayout extends Mn.LayoutView {
   constructor(opts) {
     this.regions = {
-      list: '#list'
+      list: '#list',
+      list2: '#list-two',
+      list3: '#list-three'
     };
 
     super(opts)
@@ -33,9 +35,26 @@ class SortLayout extends Mn.LayoutView {
     this.showChildView('list', new MySortedList({
       collection: myList
     }));
+    this.showChildView('list2', new MySortedList({
+      collection: myList,
+      viewComparator: (model) => {
+        return -1 * model.get('msg').length
+      }
+    }));
+    this.showChildView('list3', new MySortedList({
+      collection: myList,
+      viewComparator: (model) => {
+        return Math.random()
+      }
+    }));
+
   }
   template() {
-    return `<div id='list'></div>`
+    return `
+      <div id='list'></div>
+      <div id='list-two'></div>
+      <div id='list-three'></div>
+    `
   }
 }
 
