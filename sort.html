@@ -6,6 +6,8 @@
         float: left;
       }
     </style>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
   </head>
   <body>
     <ul>
@@ -13,12 +15,34 @@
       <li><a class='active' href="sort.html">sort demo</a></li>
       <li><a href="optimized.html">optimized resort demo</a></li>
     </ul>
+    <pre>
+      <code>
+this.showChildView('list', new MySortedList({
+  collection: myList
+}));
+
+this.showChildView('list2', new MySortedList({
+  collection: myList,
+  viewComparator: (model) => {
+    return -1 * model.get('msg').length
+  }
+}));
+
+this.showChildView('list3', new MySortedList({
+  collection: myList,
+  viewComparator: (model) => {
+    return Math.random()
+  }
+}));
+      </code>
+    </pre>
     <p><b>
       This is a demo showing the same backing collection sorted in three different ways at the view layer.
     </b></p>
     <div id="app"></div>
   </body>
   <script src="node_modules/jquery/dist/jquery.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
   <script src="node_modules/lodash/index.js"></script>
   <script src="node_modules/backbone/backbone.js"></script>
   <script src="lib/backbone.marionette.js"></script>

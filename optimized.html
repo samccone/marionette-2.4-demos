@@ -1,5 +1,7 @@
 <html>
   <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
   </head>
   <body>
     <ul>
@@ -7,10 +9,31 @@
       <li><a href="sort.html">sort demo</a></li>
       <li><a class='active' href="optimized.html">optimized resort demo</a></li>
     </ul>
+    <pre>
+      <code>
+class MySortedList extends Mn.CollectionView {
+  constructor(opts) {
+    this.tagName = 'ul';
+    this.childView = CommitView;
+    this.invert = false;
+    super(opts);
+  }
+  invertSort(fast) {
+    this.reorderOnSort = fast;
+    this.invert = !this.invert;
+    this.resortView();
+  }
+  viewComparator(model) {
+    return (this.invert ? -1 : 1 ) * model.get('msg').length;
+  }
+};
+      </code>
+    </pre>
     <button id='old'>Old "dumb" resort</button>
     <button id='new'>New resort behavior</button>
     <div id="app"></div>
   </body>
+  <script>hljs.initHighlightingOnLoad();</script>
   <script src="node_modules/jquery/dist/jquery.js"></script>
   <script src="node_modules/lodash/index.js"></script>
   <script src="node_modules/backbone/backbone.js"></script>

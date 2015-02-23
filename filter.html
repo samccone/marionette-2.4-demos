@@ -1,5 +1,7 @@
 <html>
   <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
   </head>
   <body>
     <ul>
@@ -7,8 +9,29 @@
       <li><a href="sort.html">sort demo</a></li>
       <li><a href="optimized.html">optimized resort demo</a></li>
     </ul>
+    <pre>
+      <code>
+class MyFilteredList extends Mn.CollectionView {
+  constructor(opts) {
+    this.tagName = 'ul';
+    this.childView = AuthorView;
+    this.filterModel = opts.filterModel;
+    super(opts);
+
+    this.listenTo(this.filterModel, 'change:filter', this.render);
+  }
+  filter(model, index, collection) {
+    return ~model.get('name').indexOf(
+      this.filterModel.get('filter')
+    )
+  }
+};
+      </code>
+    </pre>
+
     <div id="app"></div>
   </body>
+  <script>hljs.initHighlightingOnLoad();</script>
   <script src="node_modules/jquery/dist/jquery.js"></script>
   <script src="node_modules/lodash/index.js"></script>
   <script src="node_modules/backbone/backbone.js"></script>
